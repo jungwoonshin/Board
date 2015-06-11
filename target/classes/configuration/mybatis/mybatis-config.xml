@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<settings>
+		<setting name="lazyLoadingEnabled" value="false" />
+		<setting name="cacheEnabled" value="true" />
+		<setting name="multipleResultSetsEnabled" value="true" />
+		<setting name="useColumnLabel" value="true" />
+		<setting name="useGeneratedKeys" value="false" />
+		<setting name="autoMappingBehavior" value="PARTIAL" />
+		<setting name="defaultExecutorType" value="SIMPLE" />
+		<setting name="defaultStatementTimeout" value="25000" />
+		<setting name="safeRowBoundsEnabled" value="false" />
+		<setting name="mapUnderscoreToCamelCase" value="true" />
+		<setting name="localCacheScope" value="SESSION" />
+		<setting name="jdbcTypeForNull" value="OTHER" />
+	</settings>
+
+	<typeAliases>
+		<!-- <typeAlias alias="member" type="com.cntt.outback.member.model.MemberModel" />
+		<typeAlias alias="memberRule" type="com.cntt.outback.member.model.MemberRuleModel" />
+		<typeAlias alias="gbnCode" type="com.cntt.outback.admin.notice.model.GBNCodeModel" />
+		<typeAlias alias="notice" type="com.cntt.outback.notice.model.NoticeModel" />
+		<typeAlias alias="noticeFile" type="com.cntt.outback.notice.model.NoticeFileModel" />
+		<typeAlias alias="eduProgram" type="com.cntt.outback.admin.education.model.EduProgramModel" />
+		<typeAlias alias="eduSubject" type="com.cntt.outback.admin.education.model.EduSubjectModel" />
+		<typeAlias alias="eduChapter" type="com.cntt.outback.admin.education.model.EduChapterModel" />
+		<typeAlias alias="eduQuestion" type="com.cntt.outback.admin.education.model.EduQuestionModel" />
+		<typeAlias alias="eduReply" type="com.cntt.outback.admin.education.model.EduQuestionReplyModel" />
+		<typeAlias alias="eduFile" type="com.cntt.outback.admin.education.model.EduFileModel" />
+		<typeAlias alias="schedule" type="com.cntt.outback.schedule.model.ScheduleModel" />
+		<typeAlias alias="class" type="com.cntt.outback.schedule.model.ClassCodeModel" />
+		
+		이하 매장점검 Model
+		<typeAlias alias="store" 		type="com.cntt.outback.admin.shopcheck.model.StoreCheckModel" />
+		<typeAlias alias="check" 		type="com.cntt.outback.admin.shopcheck.model.StoreCheckListModel" />
+		<typeAlias alias="score" 		type="com.cntt.outback.admin.shopcheck.model.StoreScoreModel" />
+		<typeAlias alias="grade" 		type="com.cntt.outback.admin.shopcheck.model.EvalGradeModel" />
+		<typeAlias alias="checkList" 	type="com.cntt.outback.admin.shopcheck.model.StoreCheckListModel" /> -->
+		
+		
+		<typeAlias alias = "board" type ="com.shin.board.model.BoardModel" />
+		
+	</typeAliases>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+</configuration>

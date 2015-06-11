@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.shin.board.dao.BoardDao">
+
+	<select id = "getBoardList" resultType = "board" >
+		SELECT * FROM BOARD 
+		WHERE BOARD_IS_DEL = 0
+	</select>
+
+	<insert id = "insertOneBoard" parameterType="board">
+		INSERT into
+		BOARD (BOARD_TITLE, BOARD_AUTHOR, BOARD_CONTENTS, BOARD_DATE)
+		VALUES (#{boardTitle},#{boardAuthor}, #{boardContents}, getdate());
+	</insert>
+	
+	<update id="deleteOneBoard" parameterType = "int">
+		UPDATE BOARD
+		SET BOARD_IS_DEL = 1
+		WHERE BOARD_NO = #{seq};
+	</update>
+	
+	<update id="updateOneBoard" parameterType = "board" >
+		UPDATE BOARD
+		SET BOARD_TITLE = #{boardTitle},
+			BOARD_AUTHOR = #{boardAuthor},
+			BOARD_CONTENTS = #{boardContents}
+		WHERE BOARD_NO = #{boardNo}
+	</update>
+
+	<select id = "getOneBoard" parameterType = "int" resultType="board">
+		SELECT * FROM BOARD 
+		WHERE BOARD_NO = #{seq} and BOARD_IS_DEL = 0
+	</select>	
+	
+<!-- 
+	게시판 query
+	<select id="getNoticeListCount" resultType="int" parameterType="HashMap">
+		SELECT COUNT(*) FROM NOTICE WHERE IS_DEL = 0
+		<if test="category != null and category != ''">
+			AND NOTICE_CATEGORY_CODE = #{category}
+		</if>
+		<if test="searchWord != null and searchWord != ''">
+			AND ( NOTICE_TITLE like '%${searchWord}%' OR NOTICE_CONTENTS like '%${searchWord}%' )
+		</if>
+		<if test="startDate != null and startDate != '' and endDate != null and endDate != ''">
+			AND CREATEDAT between '${startDate}' and '${endDate}'
+		</if>
+	</select>
+
+	<select id="getNoticeList" resultType="notice" parameterType="HashMap">
+	
+		 SELECT  ROWNUM
+                        , NOTICE_SEQ
+                        , NOTICE_TITLE
+                        , (    SELECT GBN_CODE_NAME 
+                                FROM GBN_CODE
+                                WHERE GBN_CODE_SEQ = NOTICE_CATEGORY_CODE
+                            ) NOTICE_CATEGORY
+                        , WRITER
+                        , CREATEDAT
+                        , UPDATEDAT 
+                        , CASE
+	                            WHEN STATUS = '0' AND ord = 1 THEN 0
+	                            WHEN STATUS = '0' AND ord = 2 THEN 0
+	                            WHEN STATUS = '1' AND ord = 1 THEN 1
+	                            WHEN STATUS = '1' AND ord = 2 THEN 0
+                          END STATUS
+        FROM (
+			                SELECT *, ROW_NUMBER() OVER(ORDER BY ord, NOTICE_SEQ DESC) ROWNUM
+			                FROM   (                             
+						                            SELECT *, 1 ord FROM NOTICE WHERE IS_DEL=0 AND STATUS=1
+						                            UNION ALL
+						                            SELECT *, 2 ord 
+						                            FROM NOTICE 
+						                            WHERE IS_DEL=0
+						                            <if test="category != null and category != ''">
+						                            AND NOTICE_CATEGORY_CODE = #{category}
+						                            </if>
+						                            <if test="searchWord != null and searchWord != ''">
+						                            AND ( NOTICE_TITLE like '%${searchWord}%' OR NOTICE_CONTENTS like '%${searchWord}%' )
+						                            </if>
+						                            <if test="startDate != null and startDate != '' and endDate != null and endDate != ''">
+						                                AND CREATEDAT between '${startDate}' and '${endDate}'
+						                            </if> 
+			                        ) a 
+			             )b      
+        WHERE ROWNUM BETWEEN #{startRow} AND #{endRow}
+        
+	</select>
+
+	<select id="getNoticeDetail" resultType="notice" parameterType="int">
+		SELECT  NOTICE_SEQ, 
+                        NOTICE_TITLE, 
+                       (  SELECT GBN_CODE_NAME 
+                           FROM GBN_CODE
+                           WHERE GBN_CODE_SEQ = NOTICE_CATEGORY_CODE
+                        ) NOTICE_CATEGORY,
+                        NOTICE_CONTENTS,
+                        WRITER,
+                        UPDATER,
+                        CREATEDAT,
+                        UPDATEDAT
+        FROM NOTICE WHERE NOTICE_SEQ = #{seq} AND IS_DEL = 0
+	</select>
+
+	<select id="getPreviousNoticeDetail" resultType="notice" parameterType="int">
+		SELECT TOP 1 NOTICE_SEQ, NOTICE_TITLE, UPDATEDAT
+		FROM NOTICE
+		<![CDATA[
+		WHERE IS_DEL = 0 AND  NOTICE_SEQ < #{seq}
+		]]>
+		ORDER BY NOTICE_SEQ DESC
+	</select>
+
+	<select id="getNextNoticeDetail" resultType="notice" parameterType="int">
+		SELECT TOP 1 NOTICE_SEQ, NOTICE_TITLE, UPDATEDAT
+		FROM NOTICE
+		WHERE IS_DEL = 0 AND NOTICE_SEQ > #{seq}
+		ORDER BY NOTICE_SEQ ASC
+	</select>
+
+	<select id="getNoticeFileInfo" resultType="noticeFile" parameterType="int">
+		SELECT * FROM NOTICE_FILE WHERE NOTICE_FILE_SEQ = #{noticeFileSeq} AND IS_DEL = 0
+	</select>
+
+	<select id="getNoticeFileList" resultType="noticeFile" parameterType="int">
+		SELECT NOTICE_FILE_SEQ, NOTICE_FILE_NAME, NOTICE_FILE_SIZE
+		FROM NOTICE_FILE
+		WHERE NOTICE_SEQ = #{noticeSeq} AND IS_DEL = 0
+		ORDER BY NOTICE_FILE_SEQ DESC
+	</select>
+
+	게시판 파일 관리 쿼리 끝
+	<select id="getNoticeGbnCode" resultType="gbnCode">
+    
+        SELECT GBN_CODE_SEQ, GBN_CODE_NAME
+        FROM GBN_CODE 
+        WHERE GBN_CODE_CATEGORY = 'NOTICE' AND IS_DEL = 0
+        
+    </select>
+     -->
+</mapper>

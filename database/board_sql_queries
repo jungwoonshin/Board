@@ -1,0 +1,27 @@
+select * from BOARD;
+
+insert into BOARD (BOARD_TITLE, BOARD_AUTHOR, BOARD_CONTENTS)
+VALUES ('a','b', 'c');
+
+insert into employee
+  (first, last, age, address, city, state)
+  values ('Luke', 'Duke', 45, '2130 Boars Nest', 
+          'Hazard Co', 'Georgia');
+
+ALTER TABLE BOARD
+ALTER COLUMN BOARD_NO int NULL;
+
+ALTER TABLE BOARD ALTER COLUMN BOARD_NO int NULL;
+
+ALTER TABLE BOARD 
+ALTER COLUMN BOARD_IS_DEL int null;
+
+ALTER TABLE BOARD 
+ALTER COLUMN BOARD_VIEW_COUNT int null;
+
+UPDATE BOARD
+SET BOARD_IS_DEL = 1
+WHERE BOARD_NO = 6;
+
+SELECT * FROM BOARD 
+		WHERE BOARD_NO = 22 and BOARD_IS_DEL = 0
